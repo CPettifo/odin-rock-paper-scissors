@@ -1,7 +1,4 @@
-playerChoice = prompt();
-const computerChoice = getComputerChoice();
-playerChoice = playerChoice.toLowerCase();
-console.log(playRound(playerChoice, computerChoice));
+game();
 
 
 function getComputerChoice() {
@@ -11,19 +8,83 @@ function getComputerChoice() {
     let num = (Math.floor(Math.random() * (max - min + 1) + min));
 
     if (num === 1) {
-        return "rock";
+        return "Rock";
     }
     else if (num === 2) {
-        return "scissors";
+        return "Scissors";
     }
     else {
-        return "paper";
+        return "Paper";
     }
     
 }
 
-function playRound(playerSelection, computerSelection) {
-    if (playerSelection === computerSelection) {
-        return "Tie";
+function playRound(P1, comp) {
+    if (P1 === comp) {
+        return "tie"
+    }
+    
+    P1 = P1.length;
+    comp = comp.length;
+    if (P1 == 4) {
+        if (comp == 5) {
+            return "lose"
+        }
+        else {
+            return "win"
+        }
+    }
+    else if (P1 == 8) {
+        if (comp == 4) {
+            return "lose"
+        }
+        else {
+            return "win"
+        }
+    }
+    else {
+        if (comp == 4) {
+            return "win"
+        }
+        else {
+            return "lose"
+        }
+    }
+}
+
+function game() {
+    let score = 0;
+    for (let i = 0; i < 5; i++) {
+
+        playerChoice = prompt();
+        computerChoice = getComputerChoice();
+        playerChoice = playerChoice.toLowerCase();
+        console.log("Computer chose " + computerChoice);
+        computerChoice = computerChoice.toLowerCase();
+        let result = playRound(playerChoice, computerChoice);
+        if (result == "win") {
+            score += 1;
+            console.log("You win! " + playerChoice + " beats " + computerChoice + ".");
+            console.log("Score: " + score + "/5");
+        }
+
+        else if (result == "lose") {
+            console.log("You lose! " + playerChoice + " is beaten by " + computerChoice + ".");
+            console.log("Score: " + score + "/5");
+        }
+
+        else {
+            console.log("Tie! There will be another turn.");
+            i -= 1;
+        }
+        if (score === 3) {
+            i = 5;
+        }
+    }
+    if (score > 2) {
+        console.log("You defeated your AI opponent.");
+    }
+    else {
+        console.log("You were defeated.");
     }
 }
