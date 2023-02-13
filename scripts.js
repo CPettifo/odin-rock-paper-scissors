@@ -113,7 +113,8 @@ function getScore (result, playerScore, compScore) {
     }
 }
 
-const results = document.querySelector("#results");
+const playerResults = document.querySelector("#playerResults");
+const compResults = document.querySelector("#compResults");
 
 const playa = document.createElement('playa');
 playa.classList.add("playa");
@@ -130,10 +131,25 @@ comp.classList.add("comp");
 comp.textContent = 0;
 
 
-results.appendChild(playa);
-results.appendChild(player);
-results.appendChild(com);
-results.appendChild(comp);
+const lastRound = document.querySelector("#lastRound");
+
+const compChoi = document.createElement("compChoi");
+compChoi.classList.add("compChoi");
+compChoi.textContent = " ";
+
+const prv = document.createElement("prv");
+prv.classList.add("prv");
+prv.textContent = " ";
+
+
+
+playerResults.appendChild(playa);
+playerResults.appendChild(player);
+compResults.appendChild(com);
+compResults.appendChild(comp);
+lastRound.appendChild(compChoi);
+lastRound.appendChild(prv);
+
 
 const buttons = document.querySelectorAll("button")
 buttons.forEach((button) => {
@@ -142,15 +158,15 @@ buttons.forEach((button) => {
         let result = playRound(button.id, compChoice);
         let playerScore = +player.textContent;
         let compScore = +comp.textContent;
-        console.log("Computer chose " + compChoice);
-        console.log("You " + result + " with " + button.id)
+        compChoi.textContent = "Computer chose " + compChoice + ". ";
+        prv.textContent = "You " + result + " with " + button.id;
         if (result == "win") {
             player.textContent = playerScore + 1;
         }
         else if (result == "lose") {
             comp.textContent = compScore + 1;
         }
-        else{
+        else {
             comp.textContent = compScore;
         }
     });
