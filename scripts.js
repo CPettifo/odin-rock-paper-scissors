@@ -54,14 +54,20 @@ function playRound(P1, comp) {
 
 function game() {
     let score = 0;
+    let choices = ["rock", "scissors", "paper"]
     for (let i = 0; i < 5; i++) {
 
-        playerChoice = prompt();
+        playerChoice = prompt("Please enter your choice");
         computerChoice = getComputerChoice();
         playerChoice = playerChoice.toLowerCase();
         console.log("Computer chose " + computerChoice);
         computerChoice = computerChoice.toLowerCase();
-        let result = playRound(playerChoice, computerChoice);
+        if (choices.includes(playerChoice)) {
+            result = playRound(playerChoice, computerChoice);
+        }
+        else {
+            result = "invalid";
+        }
         if (result == "win") {
             score += 1;
             console.log("You win! " + playerChoice + " beats " + computerChoice + ".");
@@ -72,7 +78,10 @@ function game() {
             console.log("You lose! " + playerChoice + " is beaten by " + computerChoice + ".");
             console.log("Score: " + score + "/5");
         }
-
+        else if (result == "invalid") {
+            i -= 1;
+            console.log("Invalid input from user. Another turn will be added.")
+        }
         else {
             console.log("Tie! There will be another turn.");
             i -= 1;
@@ -81,8 +90,9 @@ function game() {
             i = 5;
         }
     }
+    console.log("Game Over.")
     if (score > 2) {
-        console.log("You defeated your AI opponent.");
+        console.log("You were victorious.");
     }
     else {
         console.log("You were defeated.");
