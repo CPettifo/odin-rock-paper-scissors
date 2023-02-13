@@ -1,4 +1,3 @@
-game();
 
 
 function getComputerChoice() {
@@ -8,18 +7,19 @@ function getComputerChoice() {
     let num = (Math.floor(Math.random() * (max - min + 1) + min));
 
     if (num === 1) {
-        return "Rock";
+        return "rock";
     }
     else if (num === 2) {
-        return "Scissors";
+        return "scissors";
     }
     else {
-        return "Paper";
+        return "paper";
     }
     
 }
 
 function playRound(P1, comp) {
+    
     if (P1 === comp) {
         return "tie"
     }
@@ -51,7 +51,7 @@ function playRound(P1, comp) {
         }
     }
 }
-
+/*
 function game() {
     let score = 0;
     let choices = ["rock", "scissors", "paper"]
@@ -98,3 +98,60 @@ function game() {
         console.log("You were defeated.");
     }
 }
+*/
+function getScore (result, playerScore, compScore) {
+    if (result == "win") {
+        playerScore += 1;
+        return (playerScore, compScore);
+    }
+    else if (result == "lose") {
+        compScore += 1;
+        return (playerScore, compScore);
+    }
+    else {
+        return (playerScore, compScore);
+    }
+}
+
+const results = document.querySelector("#results");
+
+const playa = document.createElement('playa');
+playa.classList.add("playa");
+playa.textContent = "Player Score: ";
+const player = document.createElement('player');
+player.classList.add("player");
+player.textContent = 0;
+
+const com = document.createElement("com");
+com.classList.add("com");
+com.textContent = "Computer Score: "
+const comp = document.createElement('comp');
+comp.classList.add("comp");
+comp.textContent = 0;
+
+
+results.appendChild(playa);
+results.appendChild(player);
+results.appendChild(com);
+results.appendChild(comp);
+
+const buttons = document.querySelectorAll("button")
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+        let compChoice = getComputerChoice();
+        let result = playRound(button.id, compChoice);
+        let playerScore = +player.textContent;
+        let compScore = +comp.textContent;
+        console.log("Computer chose " + compChoice);
+        console.log("You " + result + " with " + button.id)
+        if (result == "win") {
+            player.textContent = playerScore + 1;
+        }
+        else if (result == "lose") {
+            comp.textContent = compScore + 1;
+        }
+        else{
+            comp.textContent = compScore;
+        }
+    });
+});
