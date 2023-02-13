@@ -1,4 +1,8 @@
-console.log(getComputerChoice())
+playerChoice = prompt();
+const computerChoice = getComputerChoice();
+playerChoice = playerChoice.toLowerCase();
+console.log(playRound(playerChoice, computerChoice));
+
 
 function getComputerChoice() {
     let min = Math.ceil(1);
@@ -7,13 +11,19 @@ function getComputerChoice() {
     let num = (Math.floor(Math.random() * (max - min + 1) + min));
 
     if (num === 1) {
-        return "Rock";
+        return "rock";
     }
     else if (num === 2) {
-        return "Scissors";
+        return "scissors";
     }
     else {
-        return "Paper";
+        return "paper";
     }
     
+}
+
+function playRound(playerSelection, computerSelection) {
+    if (playerSelection === computerSelection) {
+        return "Tie";
+    }
 }
