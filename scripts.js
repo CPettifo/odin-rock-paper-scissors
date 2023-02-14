@@ -160,11 +160,37 @@ buttons.forEach((button) => {
         let compScore = +comp.textContent;
         compChoi.textContent = "Computer chose " + compChoice + ". ";
         prv.textContent = "You " + result + " with " + button.id;
+
+        
+        if (compScore > 4) {
+            comp.textContent = "0";
+            player.textContent = "0";
+            prv.textContent = "You lose!";
+            compChoi.textContent = "";
+        }
         if (result == "win") {
-            player.textContent = playerScore + 1;
+            playerScore += 1;
+            if (playerScore > 4) {
+                player.textContent = "0";
+                comp.textContent = "0";
+                prv.textContent = "You scored 5 first, you win!";
+                compChoi.textContent = "";
+            }
+            else {
+                player.textContent = playerScore;
+            }
         }
         else if (result == "lose") {
-            comp.textContent = compScore + 1;
+            compScore += 1;
+            if (compScore > 4) {
+                player.textContent = "0";
+                comp.textContent = "0";
+                prv.textContent = "The computer scored 5 first, you lose!";
+                compChoi.textContent = "";
+            }
+            else {  
+                comp.textContent = compScore;
+            }
         }
         else {
             comp.textContent = compScore;
